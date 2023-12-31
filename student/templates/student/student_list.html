@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pagination a {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ccc;
+            margin: 0 2px;
+        }
+        .pagination .current {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Student Result Mark Sheet</h1>
+        <div class="row">
+            <div class="col">
+                <div class="card card-body">
+                    <form method="get">
+                        {{myFilter.form}}
+                        <button class="btn btn-primary" type="submit">Search</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Class</th>
+                    <th>Subject 1</th>
+                    <th>Subject 2</th>
+                    <th>Subject 3</th>
+                    <th>Subject 4</th>
+                    <th>Subject 5</th>
+                    <th>Total Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in page_obj %}
+                    <tr>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.roll_number }}</td>
+                        <td>{{ student.class_level }}</td>
+                        <td>{{ student.subject1 }} - {{ student.subject1_score }}</td>
+                        <td>{{ student.subject2 }} - {{ student.subject2_score }}</td>
+                        <td>{{ student.subject3 }} - {{ student.subject3_score }}</td>
+                        <td>{{ student.subject4 }} - {{ student.subject4_score }}</td>
+                        <td>{{ student.subject5 }} - {{ student.subject5_score }}</td>
+                        <td>{{ student.total_score }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination links -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</body>
+</html>
