@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student',
+    'crispy_forms',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -53,7 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'student_mark.urls'
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4' 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
